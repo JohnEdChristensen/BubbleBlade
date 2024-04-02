@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8py0k5pki1po"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_nlh7y"]
+[ext_resource type="Texture2D" uid="uid://bag7bmcbc4gw5" path="res://assets/Swordfish.webp" id="1_r3q5o"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7746s"]
+radius = 2.0
+height = 32.0
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fnla0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_r3q5o")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(442, 500)
+scale = Vector2(14.997, 14.997)
+script = ExtResource("1_nlh7y")
+
+[node name="HitBox" type="CollisionShape2D" parent="."]
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_7746s")
+debug_color = Color(0, 0.686275, 0.690196, 0.65098)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -2)
+scale = Vector2(0.0589764, 0.0674375)
+sprite_frames = SubResource("SpriteFrames_fnla0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(0.06668, 0)
+limit_left = 0
+limit_top = 0
+limit_bottom = 1080
+drag_horizontal_enabled = true
+drag_horizontal_offset = 0.33
+drag_vertical_offset = -0.28
+drag_left_margin = 0.24
+drag_top_margin = 0.27
+drag_right_margin = 0.32
+drag_bottom_margin = 0.42
