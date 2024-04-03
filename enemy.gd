@@ -16,13 +16,11 @@ func setup(player: Player):
 func _physics_process(delta: float) -> void:
 	
 	var distance = player_node.position.x- position.x
-	if abs(distance) > SPEED:
-		var direction = sign(distance)
-		velocity.x = (direction * SPEED)
-	else:
-		velocity.x = 0
-		if is_on_floor() and (position.y > player_node.position.y):
-			jump()
+	
+	var direction = sign(distance)
+	velocity.x = direction * clamp(abs(distance), 0, SPEED)
+	if is_on_floor() and (position.y > player_node.position.y):
+		jump()
 	
 	process_down_velocity()
 

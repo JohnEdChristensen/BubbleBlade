@@ -26,7 +26,7 @@ func spawn_crab():
 	enemy.setup(player)
 	enemy.hit_player.connect(_on_hit_player)
 	enemy.crab_perished.connect(spawn_crab)
-	add_child(enemy)
+	call_deferred("add_child", enemy)
 
 
 func back_to_menu():
