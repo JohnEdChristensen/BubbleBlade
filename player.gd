@@ -5,6 +5,8 @@ extends CharacterBody2D
 const SPEED = 300.0
 const SPRINT_FACTOR = 3
 
+@onready var attack_box_area = $AttackBoxArea
+
 
 func _physics_process(delta: float) -> void:
 	var direction = Vector2(0,0)
