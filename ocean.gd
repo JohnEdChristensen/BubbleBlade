@@ -4,6 +4,7 @@ var player_template = preload("res://player.tscn")
 var enemy_template = preload("res://enemy.tscn")
 
 var player
+var main_menu_node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -18,7 +19,7 @@ func _process(delta: float) -> void:
 	pass
 
 func _on_hit_player():
-	pass
+	back_to_menu()
 
 func spawn_crab():
 	var enemy = enemy_template.instantiate()
@@ -26,3 +27,8 @@ func spawn_crab():
 	enemy.hit_player.connect(_on_hit_player)
 	enemy.crab_perished.connect(spawn_crab)
 	add_child(enemy)
+
+
+func back_to_menu():
+	main_menu_node.show()
+	queue_free()

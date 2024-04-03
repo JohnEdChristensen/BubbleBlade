@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4w8ban1ja3cp"]
+
+[ext_resource type="Script" path="res://ocean.gd" id="1_cydyo"]
+[ext_resource type="Texture2D" uid="uid://dbrv5xva7vh13" path="res://assets/booey.svg" id="2_yjvi6"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nt2w1"]
+
+[node name="Ocean" type="Node2D"]
+script = ExtResource("1_cydyo")
+
+[node name="Background" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 10000.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ocean" type="ColorRect" parent="Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 136.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.305882, 0.470588, 0.545098, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 1000)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_nt2w1")
+
+[node name="Floor" type="ColorRect" parent="StaticBody2D"]
+auto_translate_mode = 1
+custom_minimum_size = Vector2(10000, 200)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -100.0
+offset_right = 10000.0
+offset_bottom = 100.0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.52549, 0.392157, 0.266667, 1)
+
+[node name="Decorative Props" type="Node" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Decorative Props"]
+position = Vector2(1660.25, 102.25)
+scale = Vector2(1.57453, 1.2343)
+texture = ExtResource("2_yjvi6")
