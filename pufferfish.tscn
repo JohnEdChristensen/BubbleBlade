@@ -1,0 +1,59 @@
+[gd_scene load_steps=8 format=3 uid="uid://cd0o6mqh8jxv1"]
+
+[ext_resource type="Script" path="res://pufferfish.gd" id="1_qnx47"]
+[ext_resource type="Texture2D" uid="uid://ghui85yioxvh" path="res://assets/PufferfishExpanded.webp" id="2_yibq3"]
+[ext_resource type="Texture2D" uid="uid://cw1aipfknegdo" path="res://assets/PufferfishShrunk.webp" id="3_15sfi"]
+[ext_resource type="Shape2D" uid="uid://wdi2s6q7oc2f" path="res://shapes/pufferfish_large_attack_body.tres" id="4_ewtvw"]
+[ext_resource type="Shape2D" uid="uid://be66pqjdr0exo" path="res://shapes/pufferfish_small_body.tres" id="5_3oyp8"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g8tao"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_yibq3")
+}],
+"loop": true,
+"name": &"large",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_15sfi")
+}],
+"loop": true,
+"name": &"small",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gp82x"]
+radius = 99.67
+height = 238.92
+
+[node name="Pufferfish" type="CharacterBody2D"]
+script = ExtResource("1_qnx47")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g8tao")
+animation = &"large"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.68, -11.225)
+rotation = -1.5708
+shape = SubResource("CapsuleShape2D_gp82x")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(-8.41, -8.82)
+rotation = -1.5708
+shape = ExtResource("4_ewtvw")
+
+[node name="VulnerableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableArea"]
+position = Vector2(-3.8, 0)
+rotation = -1.5708
+shape = ExtResource("5_3oyp8")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_entered"]
+[connection signal="area_entered" from="VulnerableArea" to="." method="_on_vulnerable_area_area_entered"]
