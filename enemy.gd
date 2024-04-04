@@ -35,12 +35,8 @@ func jump() -> void:
 func perish() -> void:
 	crab_perished.emit()
 	queue_free()
-
-func _on_left_claw_area_body_entered(body):
-	if body == player_node:
-		hit_player.emit()
-
-func _on_right_claw_area_body_entered(body):
+	
+func _on_attack_area_entered(body):
 	if body == player_node:
 		hit_player.emit()
 
