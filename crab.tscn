@@ -1,8 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwlq8t853qja0"]
 
-[ext_resource type="Script" path="res://enemy.gd" id="1_xky53"]
-[ext_resource type="Texture2D" uid="uid://ct0bd1qwotkv" path="res://assets/Crab.webp" id="2_82rk2"]
-[ext_resource type="Shape2D" uid="uid://c2tiingcul4fg" path="res://shapes/crab_body.tres" id="2_klvas"]
+[ext_resource type="Script" path="res://crab.gd" id="1_in6sx"]
+[ext_resource type="Shape2D" uid="uid://c2tiingcul4fg" path="res://shapes/crab_body.tres" id="2_h34t4"]
+[ext_resource type="Texture2D" uid="uid://ct0bd1qwotkv" path="res://assets/Crab.webp" id="3_tj20h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_k58i8"]
 radius = 38.9
@@ -12,17 +12,17 @@ height = 105.9
 radius = 45.0
 height = 100.0
 
-[node name="Enemy" type="CharacterBody2D"]
-script = ExtResource("1_xky53")
+[node name="Crab" type="CharacterBody2D"]
+script = ExtResource("1_in6sx")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 38.18)
 rotation = 1.5708
-shape = ExtResource("2_klvas")
+shape = ExtResource("2_h34t4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-8, -11)
-texture = ExtResource("2_82rk2")
+texture = ExtResource("3_tj20h")
 
 [node name="AttackArea" type="Area2D" parent="."]
 
@@ -40,7 +40,7 @@ shape = SubResource("CapsuleShape2D_yfar0")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableArea"]
 position = Vector2(0, 37.755)
 rotation = 1.5708
-shape = ExtResource("2_klvas")
+shape = ExtResource("2_h34t4")
 
 [connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_entered"]
 [connection signal="area_entered" from="VulnerableArea" to="." method="_on_vulnerable_area_area_entered"]
