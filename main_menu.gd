@@ -14,6 +14,5 @@ func _process(delta):
 
 func _on_button_pressed():
 	var game = ocean_template.instantiate()
-	game.main_menu_node = self
 	get_parent().add_child(game)
-	hide()
+	queue_free()
