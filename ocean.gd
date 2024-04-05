@@ -5,6 +5,7 @@ var crab_template = preload("res://crab.tscn")
 var pufferfish_template = preload("res://pufferfish.tscn")
 var jellyfish_template = preload("res://jellyfish.tscn")
 var end_screen_template = preload("res://end_screen.tscn")
+var buoy_template = preload("res://buoy.tscn")
 
 var player
 var win_distance = 10000
@@ -17,6 +18,9 @@ func _ready() -> void:
 	spawn_crab(Vector2(1000, 500))
 	spawn_pufferfish(Vector2(2000, 500))
 	spawn_jellyfish(Vector2(3000, 500))
+	
+	for i in 11:
+		spawn_buoy(i * 1000)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -55,6 +59,11 @@ func spawn_jellyfish(location: Vector2):
 	jellyfish.hit_player.connect(_on_hit_player)
 	jellyfish.perished.connect(_on_enemy_perished)
 	call_deferred("add_child", jellyfish)
+
+func spawn_buoy(x_location: int):
+	var buoy = buoy_template.instantiate()
+	buoy.setup(x_location)
+	$"Decorative Props".add_child(buoy)
 
 func end_game(win: bool, enemy_death: E.EnemyType, distance_left: int):
 	var end_screen = end_screen_template.instantiate()
