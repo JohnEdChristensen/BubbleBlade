@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmjk3k4bbsgt1"]
+
+[ext_resource type="Script" path="res://end_screen.gd" id="1_xb4yv"]
+
+[node name="EndScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xb4yv")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="GG" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "GG!"
+horizontal_alignment = 1
+
+[node name="DeathLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "You died to a <placement text>."
+horizontal_alignment = 1
+
+[node name="DistanceLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "You were <number> meters from home."
+horizontal_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 135.265)
+layout_mode = 2
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Back to Main Menu"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="back_to_menu"]

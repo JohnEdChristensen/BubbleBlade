@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=3 uid="uid://cydw5ltb6pp42"]
+
+[ext_resource type="Script" path="res://buoy.gd" id="1_3ftek"]
+[ext_resource type="Texture2D" uid="uid://dbrv5xva7vh13" path="res://assets/booey.svg" id="1_dbvtt"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_atcyb"]
+radius = 55.0
+height = 156.0
+
+[node name="Buoy" type="CharacterBody2D"]
+script = ExtResource("1_3ftek")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+custom_minimum_size = Vector2(80, 50)
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -40.0
+offset_top = 67.075
+offset_right = 40.0
+offset_bottom = 117.075
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.5
+offset_right = 25.5
+offset_bottom = 42.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+text = "100"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_dbvtt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_atcyb")

@@ -4,8 +4,11 @@ var player_template = preload("res://player.tscn")
 var crab_template = preload("res://crab.tscn")
 var pufferfish_template = preload("res://pufferfish.tscn")
 var jellyfish_template = preload("res://jellyfish.tscn")
+var end_screen_template = preload("res://end_screen.tscn")
+var buoy_template = preload("res://buoy.tscn")
 
 var player
+var win_distance = 10000
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,13 +18,17 @@ func _ready() -> void:
 	spawn_crab(Vector2(1000, 500))
 	spawn_pufferfish(Vector2(2000, 500))
 	spawn_jellyfish(Vector2(3000, 500))
+	
+	for i in 11:
+		spawn_buoy(i * 1000)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if player.position.x > win_distance:
+		end_game(true, E.EnemyType.NULL, 0)
 
-func _on_hit_player(_enemy_type: E.EnemyType):
-	back_to_menu()
+func _on_hit_player(enemy_type: E.EnemyType):
+	end_game(false, enemy_type, win_distance - player.position.x)
 
 func _on_enemy_perished(enemy_type: E.EnemyType):
 	match enemy_type:
@@ -53,8 +60,13 @@ func spawn_jellyfish(location: Vector2):
 	jellyfish.perished.connect(_on_enemy_perished)
 	call_deferred("add_child", jellyfish)
 
-func back_to_menu():
-	var main_menu_template = load("res://main_menu.tscn")
-	var main_menu = main_menu_template.instantiate()
-	get_parent().add_child(main_menu)
+func spawn_buoy(x_location: int):
+	var buoy = buoy_template.instantiate()
+	buoy.setup(x_location)
+	$"Decorative Props".add_child(buoy)
+
+func end_game(win: bool, enemy_death: E.EnemyType, distance_left: int):
+	var end_screen = end_screen_template.instantiate()
+	end_screen.setup(win, enemy_death, distance_left)
+	get_parent().add_child(end_screen)
 	queue_free()
