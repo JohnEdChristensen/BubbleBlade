@@ -1,0 +1,47 @@
+[gd_scene load_steps=6 format=3 uid="uid://capb36ggak60k"]
+
+[ext_resource type="Script" path="res://jellyfish.gd" id="1_toug0"]
+[ext_resource type="Texture2D" uid="uid://gxbpffjlg005" path="res://assets/Jellyfish.webp" id="2_6rv0r"]
+[ext_resource type="Shape2D" uid="uid://bnpow0wjfh0xj" path="res://shapes/jellyfish_body.tres" id="3_7ggaq"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dfbla"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6rv0r")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mshpn"]
+size = Vector2(130, 110.118)
+
+[node name="Jellyfish" type="CharacterBody2D"]
+scale = Vector2(0.51, 0.51)
+script = ExtResource("1_toug0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_dfbla")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -67.385)
+rotation = -1.5708
+shape = ExtResource("3_7ggaq")
+
+[node name="AttackArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
+position = Vector2(0, 60.9412)
+shape = SubResource("RectangleShape2D_mshpn")
+
+[node name="VulnerableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableArea"]
+position = Vector2(0, -67.195)
+rotation = -1.5708
+shape = ExtResource("3_7ggaq")
+
+[connection signal="body_entered" from="AttackArea" to="." method="_on_attack_area_entered"]
+[connection signal="area_entered" from="VulnerableArea" to="." method="_on_vulnerable_area_area_entered"]
