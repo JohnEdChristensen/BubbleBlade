@@ -19,19 +19,10 @@ radius = 0.604225
 height = 4.83721
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(442, 500)
+position = Vector2(257, 576)
 scale = Vector2(14.997, 14.997)
+motion_mode = 1
 script = ExtResource("1_nlh7y")
-
-[node name="HitBox" type="CollisionPolygon2D" parent="."]
-position = Vector2(0.40008, -0.667801)
-scale = Vector2(1.54698, 1.06678)
-polygon = PackedVector2Array(-2.32759, -4.56199, -2.62931, -5.6871, 1.2931, -3.49939, 2.71552, -1.31169, 7.5431, -0.499109, 7.37069, 1.43857, 2.37069, 1.31356, 1.33621, 2.12613, -3.62069, 2.18864, -6.33621, 1.37607, -8.31897, 2.18864, -9.74138, 2.06363, -9.74138, -1.24918, -7.62931, -0.874146, -6.50862, -0.124075, -5.64655, -1.99925, -3.83621, -3.06185, -1.93966, -3.43689)
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0.466759, -2.40048)
-scale = Vector2(0.0589764, 0.0674375)
-sprite_frames = SubResource("SpriteFrames_fnla0")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0.06668, 0)
@@ -46,7 +37,18 @@ drag_top_margin = 0.27
 drag_right_margin = 0.32
 drag_bottom_margin = 0.42
 
+[node name="HitBox" type="CollisionPolygon2D" parent="."]
+position = Vector2(1.5537, 1.65267)
+scale = Vector2(1.54698, 1.06678)
+polygon = PackedVector2Array(-2.32759, -4.56199, -2.62931, -5.6871, 1.2931, -3.49939, 2.71552, -1.31169, 7.5431, -0.499109, 7.37069, 1.43857, 2.37069, 1.31356, 1.33621, 2.12613, -3.62069, 2.18864, -6.33621, 1.37607, -8.31897, 2.18864, -9.74138, 2.06363, -9.74138, -1.24918, -7.62931, -0.874146, -6.50862, -0.124075, -5.64655, -1.99925, -3.83621, -3.06185, -1.93966, -3.43689)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.62038, -0.080015)
+scale = Vector2(0.0589764, 0.0674375)
+sprite_frames = SubResource("SpriteFrames_fnla0")
+
 [node name="AttackBoxArea" type="Area2D" parent="."]
+position = Vector2(1.15362, 2.32047)
 
 [node name="AttackBox" type="CollisionShape2D" parent="AttackBoxArea"]
 position = Vector2(13.045, -0.327999)
