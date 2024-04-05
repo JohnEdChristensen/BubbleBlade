@@ -1,7 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://b4w8ban1ja3cp"]
+[gd_scene load_steps=3 format=3 uid="uid://b4w8ban1ja3cp"]
 
 [ext_resource type="Script" path="res://ocean.gd" id="1_cydyo"]
-[ext_resource type="Texture2D" uid="uid://dbrv5xva7vh13" path="res://assets/booey.svg" id="2_yjvi6"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_nt2w1"]
 
@@ -21,7 +20,8 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 136.0
+offset_top = 50.0
+offset_bottom = 50.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -49,8 +49,3 @@ size_flags_vertical = 3
 color = Color(0.52549, 0.392157, 0.266667, 1)
 
 [node name="Decorative Props" type="Node" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Decorative Props"]
-position = Vector2(1660.25, 102.25)
-scale = Vector2(1.57453, 1.2343)
-texture = ExtResource("2_yjvi6")
