@@ -2,5 +2,6 @@ extends Node
 
 enum EnemyType {
 	CRAB,
-	PUFFERFISH
+	PUFFERFISH,
+	JELLYFISH
 }
