@@ -9,14 +9,14 @@ var SECONDS_TO_TOP_SPEED = 100
 var ACCELERATION = (TOP_SPEED-MIN_SPEED)/SECONDS_TO_TOP_SPEED
 
 @export var ROTATION_SPEED = 4*PI
-var SPRINT_FACTOR = 3
+@export var BOOST_FACTOR = 3
+
+#state
+var is_boosted = false
+
 
 @onready var attack_box_area = $AttackBoxArea
 
-func update_rotation_lerp(start,end,amount) -> float:
-		return lerp_angle(start,end,amount)
-
-	
 
 func _physics_process(delta: float) -> void:
 	#input
@@ -24,15 +24,39 @@ func _physics_process(delta: float) -> void:
 	velocity = input_direction * clamp(velocity.length()+(ACCELERATION),MIN_SPEED,TOP_SPEED)
 
 	var target_angle = input_direction.angle()
-	rotation = update_rotation_lerp(rotation,target_angle,ROTATION_SPEED * delta)
+	rotation = lerp_angle(rotation,target_angle,ROTATION_SPEED * delta)
 	
-	if Input.is_action_pressed("Sprint"):
-		velocity *= SPRINT_FACTOR
-	#process
+	if (Input.is_action_pressed("Sprint") 
+		&& $"Boost Active".is_stopped() 
+		&& $"Boost Disabled".is_stopped()):
+		activate_boost()
+	
 
-	#$AnimatedSprite2D.flip_v = velocity.x < 0
+	#process
+	if (is_boosted):
+		velocity *= BOOST_FACTOR
 	$AnimatedSprite2D.flip_v = abs(rotation) > PI/2
+	
 	# using move_and_collide
 	var collision = move_and_collide(velocity*delta)
 	if collision:
 		velocity = velocity.slide(collision.get_normal())
+
+func activate_boost() -> void:
+	$"Boost Active".start()
+	$AnimatedSprite2D.play("fast")
+	is_boosted = true
+	
+func deactivate_boost() -> void:
+	is_boosted = false;
+	$AnimatedSprite2D.play("default")
+	
+	
+func _on_boost_active_timeout() -> void:
+	deactivate_boost()
+	$"Boost Active".stop()
+	$"Boost Disabled".start()
+
+
+func _on_boost_disabled_timeout() -> void:
+	$"Boost Disabled".stop()

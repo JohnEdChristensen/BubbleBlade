@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b8py0k5pki1po"]
+[gd_scene load_steps=6 format=3 uid="uid://b8py0k5pki1po"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_nlh7y"]
 [ext_resource type="Texture2D" uid="uid://bag7bmcbc4gw5" path="res://assets/Swordfish.webp" id="1_r3q5o"]
+[ext_resource type="Texture2D" uid="uid://djn6wx47qyj5p" path="res://assets/Swordfish_fast.webp" id="3_f2nvt"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fnla0"]
 animations = [{
@@ -11,6 +12,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_f2nvt")
+}],
+"loop": true,
+"name": &"fast",
 "speed": 5.0
 }]
 
@@ -55,3 +64,11 @@ position = Vector2(13.045, -0.327999)
 rotation = 1.5708
 scale = Vector2(1.54698, 1.06678)
 shape = SubResource("CapsuleShape2D_eflvj")
+
+[node name="Boost Disabled" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="Boost Active" type="Timer" parent="."]
+
+[connection signal="timeout" from="Boost Disabled" to="." method="_on_boost_disabled_timeout"]
+[connection signal="timeout" from="Boost Active" to="." method="_on_boost_active_timeout"]
