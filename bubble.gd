@@ -11,6 +11,10 @@ var seen: bool
 func setup(player: Player, new_position: Vector2, enemy_type: E.EnemyType = E.EnemyType.BUBBLE):
 	time_spawned = Time.get_ticks_msec()
 	seen = false
+	var rng = RandomNumberGenerator.new()
+	rng.seed = Time.get_ticks_usec()
+	var rand_scale = rng.randf_range(0.2, 0.4)
+	scale = Vector2(rand_scale, rand_scale)
 	super(player, new_position, enemy_type)
 
 func enemy_physics_process(delta: float) -> void:
