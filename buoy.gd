@@ -2,8 +2,8 @@ extends CharacterBody2D
 
 var x_position: int
 
-func setup(x_position: int):
-	$ColorRect/Label.text = str(x_position)
+func setup(x_position: int, x_label: int):
+	$ColorRect/Label.text = str(x_label)
 	position.x = x_position
 	position.y = 100
 

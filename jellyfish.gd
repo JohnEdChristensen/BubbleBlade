@@ -12,7 +12,7 @@ var last_float_time: int
 func setup(player: Player, new_position: Vector2, enemy_type: E.EnemyType = E.EnemyType.JELLYFISH):
 	super(player, new_position, enemy_type)
 
-func _physics_process(delta: float) -> void:
+func enemy_physics_process(delta: float) -> void:
 	
 	var cur_time = Time.get_ticks_msec()
 	if (cur_time - last_float_time) > FLOAT_COOLDOWN_MS:
@@ -39,9 +39,7 @@ func process_float() -> void:
 	velocity.y = move_toward(velocity.y, MAX_GRAVITY, GRAVITY)
 
 func _on_attack_area_entered(body):
-	print("jelly attack")
 	super(body)
 
 func _on_vulnerable_area_area_entered(area):
-	print("jelly hit")
 	super(area)
