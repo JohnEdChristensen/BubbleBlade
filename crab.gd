@@ -10,7 +10,7 @@ func setup(player: Player, new_position: Vector2, enemy_type: E.EnemyType = E.En
 
 func enemy_physics_process(delta: float) -> void:
 	
-	var distance = player_node.position.x- position.x
+	var distance = player_node.position.x - position.x
 	
 	var direction = sign(distance)
 	velocity.x = direction * clamp(abs(distance), 0, SPEED)

@@ -4,5 +4,6 @@ enum EnemyType {
 	NULL,
 	CRAB,
 	PUFFERFISH,
-	JELLYFISH
+	JELLYFISH,
+	BUBBLE
 }

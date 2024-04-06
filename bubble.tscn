@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://d4lykyjp71t5r"]
+
+[ext_resource type="Script" path="res://bubble.gd" id="1_od7px"]
+[ext_resource type="Texture2D" uid="uid://dfkrxc2kqjucv" path="res://assets/Bubble.webp" id="2_3ic5l"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xw7lm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_3ic5l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x7nqp"]
+radius = 135.015
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hfjf3"]
+radius = 133.015
+
+[node name="Bubble" type="CharacterBody2D"]
+scale = Vector2(0.42, 0.42)
+script = ExtResource("1_od7px")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xw7lm")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_x7nqp")
+
+[node name="VulnerableArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableArea"]
+shape = SubResource("CircleShape2D_hfjf3")
+
+[connection signal="area_entered" from="VulnerableArea" to="." method="_on_vulnerable_area_area_entered"]

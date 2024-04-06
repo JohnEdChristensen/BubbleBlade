@@ -4,6 +4,7 @@ var player_template = preload("res://player.tscn")
 var crab_template = preload("res://crab.tscn")
 var pufferfish_template = preload("res://pufferfish.tscn")
 var jellyfish_template = preload("res://jellyfish.tscn")
+var bubble_template = preload("res://bubble.tscn")
 var end_screen_template = preload("res://end_screen.tscn")
 var buoy_template = preload("res://buoy.tscn")
 
@@ -27,9 +28,7 @@ func _ready() -> void:
 	$StaticBody2D/CollisionShape2D.shape.size.x = WIN_DISTANCE
 	$StaticBody2D/CollisionShape2D.position.x = WIN_DISTANCE / 2
 	
-	#spawn_crab(Vector2(1000, 500))
-	#spawn_pufferfish(Vector2(2000, 500))
-	#spawn_jellyfish(Vector2(3000, 500))
+	spawn_bubble(Vector2(1000, 500))
 	
 	for i in ((WIN_DISTANCE / ZONE_LENGTH) + 1):
 		spawn_buoy(i * ZONE_LENGTH)
@@ -75,6 +74,13 @@ func spawn_jellyfish(location: Vector2):
 	jellyfish.hit_player.connect(_on_hit_player)
 	jellyfish.perished.connect(_on_enemy_perished)
 	call_deferred("add_child", jellyfish)
+
+func spawn_bubble(location: Vector2):
+	var bubble = bubble_template.instantiate()
+	bubble.setup(player, location)
+	bubble.hit_player.connect(_on_hit_player)
+	bubble.perished.connect(_on_enemy_perished)
+	call_deferred("add_child", bubble) 
 
 func try_spawn_enemy(enemy_type: E.EnemyType, zone: int) -> bool:
 	var can_spawn: bool
