@@ -44,15 +44,13 @@ func _process(delta: float) -> void:
 func _on_hit_player(enemy_type: E.EnemyType):
 	end_game(false, enemy_type, (WIN_DISTANCE - player.position.x)/ 10)
 
-func _on_enemy_perished(enemy_type: E.EnemyType):
-	#match enemy_type:
-	#	E.EnemyType.CRAB:
-	#		spawn_crab(Vector2(1000, 500))
-	#	E.EnemyType.PUFFERFISH:
-	#		spawn_pufferfish(Vector2(2000, 500))
-	#	E.EnemyType.JELLYFISH:
-	#		spawn_jellyfish(Vector2(3000, 500))
-	pass
+func _on_enemy_perished(enemy_type: E.EnemyType, perish_position: Vector2):
+	match enemy_type:
+		E.EnemyType.BUBBLE:
+			#gain bubble amount
+			pass
+		_:
+			spawn_bubble(perish_position + Vector2(200, 0))
 
 func spawn_crab(location: Vector2):
 	var crab = crab_template.instantiate()
@@ -92,23 +90,25 @@ func try_spawn_enemy(enemy_type: E.EnemyType, zone: int) -> bool:
 			cost = 2
 		E.EnemyType.JELLYFISH:
 			cost = 1
+		E.EnemyType.BUBBLE:
+			cost = -1
 	if cost <= difficulty_points:
 		can_spawn = true
 		var rng = RandomNumberGenerator.new()
 		rng.seed = Time.get_ticks_usec()
 		var x_position = rng.randf_range((zone + 1) * ZONE_LENGTH, (zone + 2) * ZONE_LENGTH)
 		var y_position = rng.randf_range(400, 600)
+		var new_position = Vector2(x_position, y_position)
 		match enemy_type:
 			E.EnemyType.CRAB:
-				spawn_crab(Vector2(x_position, y_position))
+				spawn_crab(new_position)
 			E.EnemyType.PUFFERFISH:
-				spawn_pufferfish(Vector2(x_position, y_position))
+				spawn_pufferfish(new_position)
 			E.EnemyType.JELLYFISH:
-				spawn_jellyfish(Vector2(x_position, y_position))
+				spawn_jellyfish(new_position)
+			E.EnemyType.BUBBLE:
+				spawn_bubble(new_position)
 		difficulty_points = difficulty_points - cost
-		print
-		print("spawned", enemy_type)
-		print(x_position, " ", y_position)
 	else:
 		can_spawn = false
 	return can_spawn
@@ -126,7 +126,7 @@ func on_entered_new_zone():
 	print("ZONE: ", max_player_zone)
 	print("DIFFICULTY POINTS: ", difficulty_points)
 	while(spawn_success):
-		spawn_success = try_spawn_enemy(rng.randi_range(1, 3), max_player_zone)
+		spawn_success = try_spawn_enemy(rng.randi_range(1, 4), max_player_zone)
 
 func end_game(win: bool, enemy_death: E.EnemyType, distance_left: int):
 	var end_screen = end_screen_template.instantiate()

@@ -8,7 +8,7 @@ var player_node
 var enemy_type: E.EnemyType
 
 signal hit_player(enemy_type: E.EnemyType)
-signal perished(enemy_type: E.EnemyType)
+signal perished(enemy_type: E.EnemyType, perish_position: Vector2)
 
 func setup(player: Player, new_position: Vector2, new_enemy_type: E.EnemyType):
 	enemy_type = new_enemy_type
@@ -25,7 +25,7 @@ func enemy_physics_process(delta: float) -> void:
 	pass
 
 func perish() -> void:
-	perished.emit(enemy_type)
+	perished.emit(enemy_type, position)
 	queue_free()
 	
 func _on_attack_area_entered(body):
