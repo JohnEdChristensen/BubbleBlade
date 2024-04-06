@@ -17,7 +17,7 @@ func setup(player: Player, new_position: Vector2, enemy_type: E.EnemyType = E.En
 	super(player, new_position, enemy_type)
 	shrink()
 
-func _physics_process(delta: float) -> void:
+func enemy_physics_process(delta: float) -> void:
 	
 	var player_direction = player_node.position - position
 	velocity = player_direction.normalized()

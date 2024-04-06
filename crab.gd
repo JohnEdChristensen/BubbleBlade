@@ -8,7 +8,7 @@ const GRAVITY = 8
 func setup(player: Player, new_position: Vector2, enemy_type: E.EnemyType = E.EnemyType.CRAB):
 	super(player, new_position, enemy_type)
 
-func _physics_process(delta: float) -> void:
+func enemy_physics_process(delta: float) -> void:
 	
 	var distance = player_node.position.x- position.x
 	
@@ -18,7 +18,7 @@ func _physics_process(delta: float) -> void:
 		jump()
 	
 	process_down_velocity()
-
+	
 	move_and_slide()
 
 func process_down_velocity() -> void:
