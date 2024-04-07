@@ -8,26 +8,7 @@ size = Vector2(1000, 1)
 [node name="Ocean" type="Node2D"]
 script = ExtResource("1_cydyo")
 
-[node name="Background" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 2000.0
-offset_bottom = 1080.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="Ocean" type="ColorRect" parent="Background"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = 50.0
-offset_bottom = 50.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-color = Color(0.305882, 0.470588, 0.545098, 1)
+[node name="Decorative Props" type="Node" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 position = Vector2(0, 1000)
@@ -49,4 +30,103 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.52549, 0.392157, 0.266667, 1)
 
-[node name="Decorative Props" type="Node" parent="."]
+[node name="Background" type="Control" parent="."]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2000.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ocean" type="ColorRect" parent="Background"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = -80.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.305882, 0.470588, 0.545098, 0.47451)
+
+[node name="FarParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 1)
+
+[node name="FarParallaxColor" type="Control" parent="."]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2000.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ocean" type="ColorRect" parent="FarParallaxColor"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = -155.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.305882, 0.470588, 0.545098, 0.47451)
+
+[node name="MedParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.2, 1)
+
+[node name="MedParallaxColor" type="Control" parent="."]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2000.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ocean" type="ColorRect" parent="MedParallaxColor"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.305882, 0.470588, 0.545098, 0.396078)
+
+[node name="CloseParallax" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 1)
+
+[node name="CloseParallaxColor" type="Control" parent="."]
+auto_translate_mode = 1
+layout_mode = 3
+anchors_preset = 0
+offset_right = 2000.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Ocean" type="ColorRect" parent="CloseParallaxColor"]
+auto_translate_mode = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_bottom = -105.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0.305882, 0.470588, 0.545098, 0.427451)

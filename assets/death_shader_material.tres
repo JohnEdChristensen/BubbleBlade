@@ -4,4 +4,4 @@
 
 [resource]
 shader = ExtResource("1_8p2mi")
-shader_parameter/modulate = Color(0.368627, 0, 0, 1)
+shader_parameter/modulate = Color(0.588235, 0, 0, 1)

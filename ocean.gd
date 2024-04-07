@@ -7,6 +7,7 @@ var jellyfish_template = preload("res://jellyfish.tscn")
 var bubble_template = preload("res://bubble.tscn")
 var end_screen_template = preload("res://end_screen.tscn")
 var buoy_template = preload("res://buoy.tscn")
+var decoration_template = preload("res://decoration.tscn")
 
 const WIN_DISTANCE = 50000
 const ZONE_LENGTH = 5000
@@ -14,6 +15,7 @@ const ZONE_LENGTH = 5000
 var player
 var max_player_zone: int
 var difficulty_points: int
+var seed
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,9 +23,13 @@ func _ready() -> void:
 	add_child(player)
 	max_player_zone = 0
 	difficulty_points = 0
+	seed = int(Time.get_unix_time_from_system())
 	on_entered_new_zone()
 	
 	$Background/Ocean.size.x = WIN_DISTANCE
+	$FarParallaxColor/Ocean.size.x = WIN_DISTANCE
+	$MedParallaxColor/Ocean.size.x = WIN_DISTANCE
+	$CloseParallaxColor/Ocean.size.x = WIN_DISTANCE
 	$StaticBody2D/Floor.size.x = WIN_DISTANCE
 	$StaticBody2D/CollisionShape2D.shape.size.x = WIN_DISTANCE
 	$StaticBody2D/CollisionShape2D.position.x = WIN_DISTANCE / 2
@@ -32,6 +38,9 @@ func _ready() -> void:
 	
 	for i in ((WIN_DISTANCE / ZONE_LENGTH) + 1):
 		spawn_buoy(i * ZONE_LENGTH)
+	
+	for i in (WIN_DISTANCE / 500):
+		spawn_random_decoration()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -133,3 +142,55 @@ func end_game(win: bool, enemy_death: E.EnemyType, distance_left: int):
 	end_screen.setup(win, enemy_death, distance_left)
 	get_parent().add_child(end_screen)
 	queue_free()
+
+func spawn_random_decoration():
+	var decoration = decoration_template.instantiate()
+	var rng = RandomNumberGenerator.new()
+	seed = seed + 1
+	rng.seed = seed
+	var decoration_type = rng.randi_range(0, 6)
+	var direction = rng.randi_range(0, 1)
+	var x_position = rng.randf_range(0, WIN_DISTANCE)
+	var y_position
+	var movement
+	match decoration_type:
+		E.Decoration.SEAWEED:
+			y_position = 900
+			movement = Vector2(0, 0)
+		E.Decoration.CRAB:
+			y_position = 900
+			match direction:
+				0:
+					movement = Vector2(-1, 0)
+				1:
+					movement = Vector2(1, 0)
+		_:
+			y_position = rng.randf_range(200, 800)
+			match direction:
+				0:
+					movement = Vector2(-1, 0)
+				1:
+					movement = Vector2(1, 0)
+	
+	var distance = rng.randi_range(0, 2)
+	
+	var new_scale
+	match distance:
+		E.Parallax.CLOSE:
+			new_scale = Vector2(0.3, 0.3)
+			movement = movement * 3
+		E.Parallax.MED:
+			new_scale = Vector2(0.2, 0.2)
+			movement = movement * 2
+		E.Parallax.FAR:
+			new_scale = Vector2(0.1, 0.1)
+			movement = movement * 1
+	decoration.setup(decoration_type, Vector2(x_position, y_position), movement, new_scale)
+	
+	match distance:
+		E.Parallax.CLOSE:
+			$CloseParallax.add_child(decoration)
+		E.Parallax.MED:
+			$MedParallax.add_child(decoration)
+		E.Parallax.FAR:
+			$FarParallax.add_child(decoration)

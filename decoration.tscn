@@ -1,0 +1,69 @@
+[gd_scene load_steps=10 format=3 uid="uid://cthvc8t6i8qm"]
+
+[ext_resource type="Texture2D" uid="uid://dfkrxc2kqjucv" path="res://assets/Bubble.webp" id="1_lfg26"]
+[ext_resource type="Texture2D" uid="uid://ct0bd1qwotkv" path="res://assets/Crab.webp" id="1_lkfeo"]
+[ext_resource type="Texture2D" uid="uid://gxbpffjlg005" path="res://assets/Jellyfish.webp" id="2_d2si1"]
+[ext_resource type="Material" uid="uid://dv1osqtjy8ut1" path="res://assets/death_shader_material.tres" id="2_po4t8"]
+[ext_resource type="Texture2D" uid="uid://cw1aipfknegdo" path="res://assets/PufferfishShrunk.webp" id="3_ghc63"]
+[ext_resource type="Texture2D" uid="uid://cp3jjr2hnmafh" path="res://assets/Seaweed.webp" id="4_jrvfx"]
+[ext_resource type="Texture2D" uid="uid://b8uf5rum0jdhp" path="res://assets/Turtle.webp" id="5_q64s8"]
+[ext_resource type="Script" path="res://decoration.gd" id="6_4fkxd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ek8b"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lfg26")
+}],
+"loop": true,
+"name": &"bubble",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_lkfeo")
+}],
+"loop": true,
+"name": &"crab",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_d2si1")
+}],
+"loop": true,
+"name": &"jellyfish",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_ghc63")
+}],
+"loop": true,
+"name": &"pufferfish",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_jrvfx")
+}],
+"loop": true,
+"name": &"seaweed",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_q64s8")
+}],
+"loop": true,
+"name": &"turtle",
+"speed": 5.0
+}]
+
+[node name="Decoration" type="CharacterBody2D"]
+script = ExtResource("6_4fkxd")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = ExtResource("2_po4t8")
+sprite_frames = SubResource("SpriteFrames_8ek8b")
+animation = &"turtle"
