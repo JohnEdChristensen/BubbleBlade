@@ -20,7 +20,7 @@ var ACCELERATION = (TOP_SPEED-MIN_SPEED)/SECONDS_TO_TOP_SPEED
  
 #state
 var is_boosted = false
-
+var damage: int
 
 
 #region attacks/actions
@@ -54,18 +54,22 @@ func try_start_action(action: action_state)->void:
 				velocity = Vector2(1,0)
 			velocity = velocity.normalized() *TOP_SPEED*BOOST_FACTOR
 			$AnimatedSprite2D.play("fast")
+      damage = SPRINT_DAMAGE
 		action_state.SPINNING:
 			current_action_state = action_state.SPINNING
 			$"Action Timer".start(SPIN_ACTION_SECONDS)
 			$AnimatedSprite2D.play("spinning")
 			velocity = Vector2(0,0)
+      damage = NORMAL_DAMAGE
 		action_state.BOOSTING:
 			current_action_state = action_state.BOOSTING
 			$"Action Timer".start(BOOST_ACTION_SECONDS)
 			$AnimatedSprite2D.play("fast")
+      damage = SPRINT_DAMAGE
 		action_state.DEFAULT:
 			current_action_state = action_state.DEFAULT
 			$AnimatedSprite2D.play("default")
+      damage = NORMAL_DAMAGE
 		_:
 			print("tried to start unexpected action!",action)
 			
@@ -114,6 +118,11 @@ func _on_cooldown_timer_timeout() -> void:
 
 @onready var attack_box_area = $AttackBoxArea
 
+const NORMAL_DAMAGE: int = 1
+const SPRINT_DAMAGE: int = 2
+
+func _ready() -> void:
+	damage = NORMAL_DAMAGE
 
 func _physics_process(delta: float) -> void:
 	#handle input
@@ -140,5 +149,3 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity*delta)
 	if collision:
 		velocity = velocity.slide(collision.get_normal())
-
-
