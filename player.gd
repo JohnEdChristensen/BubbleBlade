@@ -54,22 +54,22 @@ func try_start_action(action: action_state)->void:
 				velocity = Vector2(1,0)
 			velocity = velocity.normalized() *TOP_SPEED*BOOST_FACTOR
 			$AnimatedSprite2D.play("fast")
-      damage = SPRINT_DAMAGE
+			damage = SPRINT_DAMAGE
 		action_state.SPINNING:
 			current_action_state = action_state.SPINNING
 			$"Action Timer".start(SPIN_ACTION_SECONDS)
 			$AnimatedSprite2D.play("spinning")
 			velocity = Vector2(0,0)
-      damage = NORMAL_DAMAGE
+			damage = NORMAL_DAMAGE
 		action_state.BOOSTING:
 			current_action_state = action_state.BOOSTING
 			$"Action Timer".start(BOOST_ACTION_SECONDS)
 			$AnimatedSprite2D.play("fast")
-      damage = SPRINT_DAMAGE
+			damage = SPRINT_DAMAGE
 		action_state.DEFAULT:
 			current_action_state = action_state.DEFAULT
 			$AnimatedSprite2D.play("default")
-      damage = NORMAL_DAMAGE
+			damage = NORMAL_DAMAGE
 		_:
 			print("tried to start unexpected action!",action)
 			
