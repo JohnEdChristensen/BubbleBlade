@@ -1,8 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8py0k5pki1po"]
+[gd_scene load_steps=10 format=3 uid="uid://b8py0k5pki1po"]
 
 [ext_resource type="Script" path="res://player.gd" id="1_nlh7y"]
 [ext_resource type="Texture2D" uid="uid://bag7bmcbc4gw5" path="res://assets/Swordfish.webp" id="1_r3q5o"]
 [ext_resource type="Texture2D" uid="uid://djn6wx47qyj5p" path="res://assets/Swordfish_fast.webp" id="3_f2nvt"]
+[ext_resource type="Texture2D" uid="uid://dlkwpw1p1nsm8" path="res://assets/spin_action_anim/spin1.png" id="4_5kiof"]
+[ext_resource type="Texture2D" uid="uid://ceqcvck0f0po5" path="res://assets/spin_action_anim/spin2.png" id="5_sq6ej"]
+[ext_resource type="Texture2D" uid="uid://b7d4j8t8cgfvp" path="res://assets/spin_action_anim/spin3.png" id="6_8tw3e"]
+[ext_resource type="Texture2D" uid="uid://n380axaquvsp" path="res://assets/spin_action_anim/spin4.png" id="7_33wg4"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_fnla0"]
 animations = [{
@@ -21,6 +25,29 @@ animations = [{
 "loop": true,
 "name": &"fast",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_5kiof")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sq6ej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8tw3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_33wg4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_8tw3e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_sq6ej")
+}],
+"loop": true,
+"name": &"spinning",
+"speed": 20.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eflvj"]
@@ -55,6 +82,8 @@ polygon = PackedVector2Array(-2.32759, -4.56199, -2.62931, -5.6871, 1.2931, -3.4
 position = Vector2(1.62038, -0.080015)
 scale = Vector2(0.0589764, 0.0674375)
 sprite_frames = SubResource("SpriteFrames_fnla0")
+animation = &"spinning"
+frame_progress = 0.524349
 
 [node name="AttackBoxArea" type="Area2D" parent="."]
 position = Vector2(1.15362, 2.32047)
@@ -65,10 +94,10 @@ rotation = 1.5708
 scale = Vector2(1.54698, 1.06678)
 shape = SubResource("CapsuleShape2D_eflvj")
 
-[node name="Boost Disabled" type="Timer" parent="."]
+[node name="Cooldown Timer" type="Timer" parent="."]
 wait_time = 2.0
 
-[node name="Boost Active" type="Timer" parent="."]
+[node name="Action Timer" type="Timer" parent="."]
 
-[connection signal="timeout" from="Boost Disabled" to="." method="_on_boost_disabled_timeout"]
-[connection signal="timeout" from="Boost Active" to="." method="_on_boost_active_timeout"]
+[connection signal="timeout" from="Cooldown Timer" to="." method="_on_cooldown_timer_timeout"]
+[connection signal="timeout" from="Action Timer" to="." method="_on_action_timer_timeout"]
