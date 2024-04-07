@@ -26,7 +26,6 @@ script = ExtResource("1_toug0")
 sprite_frames = SubResource("SpriteFrames_dfbla")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -67.385)
 rotation = -1.5708
 shape = ExtResource("3_7ggaq")
@@ -34,14 +33,12 @@ shape = ExtResource("3_7ggaq")
 [node name="AttackArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea"]
-visible = false
 position = Vector2(0, 60.9412)
 shape = SubResource("RectangleShape2D_mshpn")
 
 [node name="VulnerableArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="VulnerableArea"]
-visible = false
 position = Vector2(0, -67.195)
 rotation = -1.5708
 shape = ExtResource("3_7ggaq")

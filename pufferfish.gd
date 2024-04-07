@@ -6,7 +6,6 @@ const MAX_GRAVITY = 300
 const GRAVITY = 8
 
 var large_body_shape = preload("res://shapes/pufferfish_large_body.tres")
-var large_attack_shape = preload("res://shapes/pufferfish_large_attack_body.tres")
 var small_body_shape = preload("res://shapes/pufferfish_small_body.tres")
 
 var expanded: bool
@@ -14,6 +13,7 @@ var expand_start_time: int
 var expand_end_time: int
 
 func setup(player: Player, new_position: Vector2, enemy_type: E.EnemyType = E.EnemyType.PUFFERFISH):
+	hp = 1
 	super(player, new_position, enemy_type)
 	shrink()
 
@@ -40,16 +40,16 @@ func expand() -> void:
 	if not expanded:
 		expanded = true
 		expand_start_time = Time.get_ticks_msec()
-		$AnimatedSprite2D.animation = "large"
-		$AttackArea/CollisionShape2D.shape = large_attack_shape
-		$VulnerableArea/CollisionShape2D.shape = null
+		$Sprite.animation = "large"
+		$AttackArea.monitoring = true
+		$VulnerableArea.monitoring = false
 		$CollisionShape2D.shape = large_body_shape
 
 func shrink() -> void:
 	expanded = false
-	$AnimatedSprite2D.animation = "small"
-	$AttackArea/CollisionShape2D.shape = null
-	$VulnerableArea/CollisionShape2D.shape = small_body_shape
+	$Sprite.animation = "small"
+	$AttackArea.monitoring = false
+	$VulnerableArea.monitoring = true
 	$CollisionShape2D.shape = small_body_shape
 	rotation_degrees = 0
 

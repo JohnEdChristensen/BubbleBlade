@@ -6,6 +6,7 @@ const MAX_GRAVITY = 300
 const GRAVITY = 8
 
 func setup(player: Player, new_position: Vector2, enemy_type: E.EnemyType = E.EnemyType.CRAB):
+	hp = 3
 	super(player, new_position, enemy_type)
 
 func enemy_physics_process(delta: float) -> void:

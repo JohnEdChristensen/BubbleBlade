@@ -50,7 +50,7 @@ func _on_enemy_perished(enemy_type: E.EnemyType, perish_position: Vector2):
 			#gain bubble amount
 			pass
 		_:
-			spawn_bubble(perish_position + Vector2(200, 0))
+			spawn_bubble(perish_position)
 
 func spawn_crab(location: Vector2):
 	var crab = crab_template.instantiate()

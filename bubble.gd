@@ -2,7 +2,6 @@ extends Enemy
 
 const MAX_GRAVITY = -300
 const GRAVITY = 30
-const DECCELERATION = 3
 const FLOAT_TIME = 1000
 
 var time_spawned: int

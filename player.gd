@@ -13,10 +13,15 @@ var ACCELERATION = (TOP_SPEED-MIN_SPEED)/SECONDS_TO_TOP_SPEED
 
 #state
 var is_boosted = false
-
+var damage: int
 
 @onready var attack_box_area = $AttackBoxArea
 
+const NORMAL_DAMAGE: int = 1
+const SPRINT_DAMAGE: int = 2
+
+func _ready() -> void:
+	damage = NORMAL_DAMAGE
 
 func _physics_process(delta: float) -> void:
 	#input
@@ -46,11 +51,12 @@ func activate_boost() -> void:
 	$"Boost Active".start()
 	$AnimatedSprite2D.play("fast")
 	is_boosted = true
+	damage = SPRINT_DAMAGE
 	
 func deactivate_boost() -> void:
 	is_boosted = false;
 	$AnimatedSprite2D.play("default")
-	
+	damage = NORMAL_DAMAGE
 	
 func _on_boost_active_timeout() -> void:
 	deactivate_boost()
