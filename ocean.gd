@@ -133,12 +133,10 @@ func spawn_buoy(x_location: int):
 	$"Decorative Props".add_child(buoy)
 
 func on_entered_new_zone():
-	difficulty_points = difficulty_points + (5 * ((max_player_zone + 2) / 2))
+	difficulty_points = difficulty_points + (5 * ((max_player_zone + 4) / 4))
 	var spawn_success: bool = true
 	var rng = RandomNumberGenerator.new()
 	rng.seed = Time.get_ticks_msec()
-	print("ZONE: ", max_player_zone)
-	print("DIFFICULTY POINTS: ", difficulty_points)
 	while(spawn_success):
 		spawn_success = try_spawn_enemy(rng.randi_range(1, 4), max_player_zone)
 
