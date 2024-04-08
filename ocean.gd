@@ -56,8 +56,7 @@ func _process(delta: float) -> void:
 		on_entered_new_zone()
 
 func _on_hit_player(enemy_type: E.EnemyType):
-	pass
-	#end_game(false, enemy_type, (WIN_DISTANCE - player.position.x)/ 10)
+	end_game(false, enemy_type, (WIN_DISTANCE - player.position.x) / ZONE_LENGTH * 100)
 
 func _on_enemy_perished(enemy_type: E.EnemyType, perish_position: Vector2):
 	match enemy_type:
