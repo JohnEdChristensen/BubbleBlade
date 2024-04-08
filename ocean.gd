@@ -8,6 +8,7 @@ var bubble_template = preload("res://bubble.tscn")
 var end_screen_template = preload("res://end_screen.tscn")
 var buoy_template = preload("res://buoy.tscn")
 var decoration_template = preload("res://decoration.tscn")
+var castle_template = preload("res://castle.tscn")
 
 const WIN_DISTANCE = 50000
 const ZONE_LENGTH = 5000
@@ -33,6 +34,10 @@ func _ready() -> void:
 	$StaticBody2D/Floor.size.x = WIN_DISTANCE
 	$StaticBody2D/CollisionShape2D.shape.size.x = WIN_DISTANCE
 	$StaticBody2D/CollisionShape2D.position.x = WIN_DISTANCE / 2
+	var castle = castle_template.instantiate()
+	castle.position.x = WIN_DISTANCE
+	castle.position.y = 600
+	add_child(castle)
 	
 	spawn_bubble(Vector2(1000, 500))
 	
@@ -51,7 +56,8 @@ func _process(delta: float) -> void:
 		on_entered_new_zone()
 
 func _on_hit_player(enemy_type: E.EnemyType):
-	end_game(false, enemy_type, (WIN_DISTANCE - player.position.x)/ 10)
+	pass
+	#end_game(false, enemy_type, (WIN_DISTANCE - player.position.x)/ 10)
 
 func _on_enemy_perished(enemy_type: E.EnemyType, perish_position: Vector2):
 	match enemy_type:

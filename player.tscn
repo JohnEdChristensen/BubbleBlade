@@ -55,6 +55,7 @@ radius = 0.604225
 height = 4.83721
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 2
 position = Vector2(257, 576)
 scale = Vector2(14.997, 14.997)
 motion_mode = 1
@@ -64,6 +65,7 @@ script = ExtResource("1_nlh7y")
 position = Vector2(0.06668, 0)
 limit_left = 0
 limit_top = 0
+limit_right = 50000
 limit_bottom = 1080
 drag_horizontal_enabled = true
 drag_right_margin = 0.05
