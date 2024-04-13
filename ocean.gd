@@ -28,6 +28,7 @@ func _ready() -> void:
 	on_entered_new_zone()
 	
 	$Background/Ocean.size.x = WIN_DISTANCE
+	$Background/Sky.size.x = WIN_DISTANCE
 	$FarParallaxColor/Ocean.size.x = WIN_DISTANCE
 	$MedParallaxColor/Ocean.size.x = WIN_DISTANCE
 	$CloseParallaxColor/Ocean.size.x = WIN_DISTANCE
@@ -41,8 +42,8 @@ func _ready() -> void:
 	
 	spawn_bubble(Vector2(1000, 500))
 	
-	for i in ((WIN_DISTANCE / ZONE_LENGTH) + 1):
-		spawn_buoy(i * ZONE_LENGTH)
+	for i in ((WIN_DISTANCE / ZONE_LENGTH)):
+		spawn_buoy((i + 1) * ZONE_LENGTH)
 	
 	for i in (WIN_DISTANCE / 500):
 		spawn_random_decoration()

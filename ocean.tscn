@@ -15,7 +15,6 @@ position = Vector2(0, 1000)
 shape = SubResource("RectangleShape2D_j8qq2")
 
 [node name="Floor" type="ColorRect" parent="StaticBody2D"]
-auto_translate_mode = 1
 custom_minimum_size = Vector2(2000, 200)
 anchors_preset = 4
 anchor_top = 0.5
@@ -29,7 +28,6 @@ size_flags_vertical = 3
 color = Color(0.52549, 0.392157, 0.266667, 1)
 
 [node name="Background" type="Control" parent="."]
-auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 2000.0
@@ -38,7 +36,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Ocean" type="ColorRect" parent="Background"]
-auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,11 +48,25 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0.305882, 0.470588, 0.545098, 0.47451)
 
+[node name="Sky" type="ColorRect" parent="Background"]
+layout_mode = 0
+offset_right = 2000.0
+offset_bottom = 100.0
+color = Color(0.564706, 0.709804, 0.827451, 1)
+
+[node name="Label" type="Label" parent="Background"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 700.0
+offset_right = 398.0
+offset_bottom = 801.0
+theme_override_font_sizes/font_size = 48
+text = "Move: WASD                                                      Dash: Shift                                                      Jab: 1                                                      Spin: 2"
+
 [node name="FarParallax" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.1, 1)
 
 [node name="FarParallaxColor" type="Control" parent="."]
-auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 2000.0
@@ -64,7 +75,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Ocean" type="ColorRect" parent="FarParallaxColor"]
-auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -81,7 +91,6 @@ color = Color(0.305882, 0.470588, 0.545098, 0.47451)
 scroll_scale = Vector2(0.2, 1)
 
 [node name="MedParallaxColor" type="Control" parent="."]
-auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 2000.0
@@ -90,7 +99,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Ocean" type="ColorRect" parent="MedParallaxColor"]
-auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -107,7 +115,6 @@ color = Color(0.305882, 0.470588, 0.545098, 0.396078)
 scroll_scale = Vector2(0.3, 1)
 
 [node name="CloseParallaxColor" type="Control" parent="."]
-auto_translate_mode = 1
 layout_mode = 3
 anchors_preset = 0
 offset_right = 2000.0
@@ -116,7 +123,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="Ocean" type="ColorRect" parent="CloseParallaxColor"]
-auto_translate_mode = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

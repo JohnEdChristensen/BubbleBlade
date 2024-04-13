@@ -149,3 +149,4 @@ func _physics_process(delta: float) -> void:
 	var collision = move_and_collide(velocity*delta)
 	if collision:
 		velocity = velocity.slide(collision.get_normal())
+	position.y = clamp(position.y, 85, 850)
